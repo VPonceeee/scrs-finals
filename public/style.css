@@ -1,0 +1,385 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+html {
+    scroll-behavior: smooth;
+  }
+
+.navbar{
+    background-color: #0f66e9;
+
+}
+
+#NavName{
+    color: whitesmoke;
+    font-size: 20px;
+}
+
+#NavLogo{
+    color: whitesmoke;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+/* #NavBtn{
+    background-color: #0f66e9;
+    color: whitesmoke;
+    font-weight: bold;
+} */
+
+
+
+
+#LinkNav{
+    
+    text-decoration: none;
+
+}
+
+
+
+.HomePageBanner{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+.hpTitle{
+
+    color: whitesmoke;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.hpTagline{
+    font-family: "Poetsen One", sans-serif;
+    font-optical-sizing: auto;
+    color: whitesmoke;
+    font-size: 60px;
+    font-weight: lighter;
+
+}
+
+
+
+#ReservBtn{
+    background-color: #0f66e9;
+    color: whitesmoke;
+    font-weight: bold;
+    border-radius: 30px;
+}
+
+#HomePageMainDiv{
+    display: flex;
+    flex-direction: column;
+}
+#HomeSection{
+    background-color: #f2f2f2;
+}
+
+.custom-datepicker .react-datepicker-wrapper {
+    width: 100%;
+}
+
+.custom-datepicker .react-datepicker__input-container input {
+    width: 100%;
+    font-size: 16px; 
+    border: 1px solid #ced4da; 
+    padding: 0.375rem 0.75rem; 
+    border-radius: 0.25rem; 
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); 
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+}
+
+
+
+/*=====================ServicesSection STYLE START HERE=============================*/
+
+#ServicesSection{
+    background-color: #f2f2f2;
+}
+
+#ServiceCard{
+    width: 19rem;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+#ServiceMainDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 70px;  
+    padding-bottom: 80px;   
+    gap: 20px;
+}
+
+.ServieIntro{
+    font-size: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: center;
+}
+
+/*=====================ServicesSection STYLE END HERE=============================*/
+
+/*=====Invoice Layout STYLE=====*/
+.GuestInfo{
+    text-align: left;
+}
+
+.RDate{
+    text-align: right; 
+}
+
+.InvoiceData{
+    font-weight: normal;
+}
+
+.TotalText{
+    text-align: end;
+}
+
+.List {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .List li {
+    margin: 0;
+    padding: 0;
+  }
+  
+
+/*=====================RESERVATION FORM STYLE START HERE=============================*/
+
+.formmain{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+#RformMainDiv{
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    background-color: #f8f9fa;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-radius: 50px;
+    height: auto;
+    position: relative;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+
+}
+
+#FormTitle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#Forms{
+    margin-left: 30px;
+    margin-right: 30px;
+ 
+}
+
+#NxtBtn{
+    background-color: #0f66e9;
+    color: whitesmoke;
+    font-weight: bold;
+    width: 200px;
+    border-radius: 20px;
+}
+
+#BackBtn{
+    background-color: #0f66e9;
+    color: whitesmoke;
+    font-weight: bold;
+    width: 200px;
+    border-radius: 20px;
+}
+
+#BackBtnDiv{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
+}
+
+/*=====================RESERVATION FORM STYLE END HERE=============================*/
+
+/*=====================ABOUT PAGE STYLE START HERE=============================*/
+
+
+
+#AboutMainDiv{
+    height: 100%;
+    margin-bottom: 20px;
+}
+
+#CardDiv{
+    background-color: #f8f9fa;
+}
+
+
+/*=====================ABOUT PAGE STYLE END HERE=============================*/
+
+
+
+/*=====================ADMIN PAGE STYLE START HERE=============================*/
+
+#AdminMainDiv{
+    width: 99%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#LoginMainDiv{
+    height: 400px;
+    width: 500px;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#LoginBtn{
+    background-color: #0f66e9;
+    color: whitesmoke;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.AdminTitle{
+
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.AdminForm{
+
+    width: 90%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+#Admintxtbox{
+    width: 100%;
+}
+
+#AdminDashboard{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    
+
+}
+
+#Sidebar{
+    background-color: #0f66e9;
+}
+#SideBarPanel{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #0f66e9;
+    padding-top: 30px;
+    gap: 50px;
+
+}
+
+#SideBarMenubtn{
+    background-color: #0f66e9;
+}
+
+
+#AdminContentsDashboard{
+    margin-top: 50px;
+}
+
+#ResevationRequest{
+    margin-top: 50px;
+}
+
+#ResevationHistory{
+    margin-top: 50px;
+}
+
+
+.ActionBtn{
+    display: flex;
+    gap: 5px;
+}
+
+#SideNavName{
+    color: whitesmoke;
+    font-size: 20px;
+}
+
+#SideNavName:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+  }
+/*=====================ADMIN PAGE STYLE END HERE=============================*/
+
+
+
+
+/*==============================BUTTONS CSS STYLE START HERE==============================*/
+
+/*=======RForm BUTTONS=======*/
+
+#FormsNxtBtn{
+    background-color: #0f66e9;
+    color: whitesmoke;
+    font-weight: bold;
+    width: 200px;
+    border-radius: 20px;
+}
+
+#FormsBackBtn{
+    background-color: #0f66e9;
+    color: whitesmoke;
+    font-weight: bold;
+    width: 200px;
+    border-radius: 20px;
+}
+
+
+/*==============================BUTTONS CSS STYLE END HERE==============================*/
