@@ -24,7 +24,7 @@ export default function Home() {
 
 
 
-        <Link to="ReservationFormOne">
+        <Link to="Reservationpage">
 
           <button type="button" id='ReservBtn' className="btn btn-lg" >
             Reserve Now

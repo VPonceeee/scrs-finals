@@ -23,7 +23,7 @@ export default function Services() {
               <div className="card-body">
                 <h5 className="card-title">Birthday</h5>
                 <p className="card-text">Services included: Clown, Party Decoration, Swimming Pool, Party Games, Rooms and Catering with a maximum of 5 food that you can request.</p>
-                <Link to="ReservationFormOne">
+                <Link to="Reservationpage">
                 <a href="#" className="btn btn-primary">Reserve Now</a>
                 </Link>
               </div>
@@ -36,7 +36,7 @@ export default function Services() {
               <div className="card-body">
                 <h5 className="card-title">Wedding</h5>
                 <p className="card-text">Services included: MC, Wedding decoration, Swimming pool, Water Sports, Rooms, and Catering with a maximum of 5 food that you can request.</p>
-                <Link to="ReservationFormOne">
+                <Link to="Reservationpage">
                 <a href="#" className="btn btn-primary">Reserve Now</a>
                 </Link>
               </div>
@@ -49,7 +49,7 @@ export default function Services() {
               <div className="card-body">
                 <h5 className="card-title">Family Reunion</h5>
                 <p className="card-text">Services included: , Family Reunion Decoration, Swimming pool, Water Sports, Rooms, and Catering with a maximum of 5 food that you can request.</p>
-                <Link to="ReservationFormOne">
+                <Link to="Reservationpage">
                 <a href="#" className="btn btn-primary">Reserve Now</a>
                 </Link>
               </div>
@@ -62,7 +62,7 @@ export default function Services() {
               <div className="card-body">
                 <h5 className="card-title">Team Building</h5>
                 <p className="card-text">Services included: MC, Team Building Decoration, Swimming Pool, Water Sport, Rooms, and Catering with a maximum of 5 food that you can request.</p>
-                <Link to="ReservationFormOne">
+                <Link to="Reservationpage">
                 <a href="#" className="btn btn-primary">Reserve Now</a>
                 </Link>
               </div>
