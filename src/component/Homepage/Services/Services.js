@@ -5,6 +5,7 @@ import teambimg from '../../../img/teambimg.jpg';
 import familyimg from '../../../img/familyimg.jpg'
 import weddingimg from '../../../img/weddingimg.png'
 
+
 export default function Services() {
   return (
     <>
@@ -22,9 +23,10 @@ export default function Services() {
               <img src={bdayimg} className="card-img-top" alt="Birthday" />
               <div className="card-body">
                 <h5 className="card-title">Birthday</h5>
-                <p className="card-text">Services included: Clown, Party Decoration, Swimming Pool, Party Games, Rooms and Catering with a maximum of 5 food that you can request.</p>
-                <Link to="ReservationFormOne">
-                <a href="#" className="btn btn-primary">Reserve Now</a>
+                <p className="card-text">Celebrate your special day at our resort! Enjoy a memorable birthday experience with your loved ones.</p>
+                <br></br>
+                <Link to="Reservation" className="btn btn-primary">
+                 Reserve Now
                 </Link>
               </div>
             </div>
@@ -35,9 +37,10 @@ export default function Services() {
               <img src={weddingimg} className="card-img-top" alt="Team Building" />
               <div className="card-body">
                 <h5 className="card-title">Wedding</h5>
-                <p className="card-text">Services included: MC, Wedding decoration, Swimming pool, Water Sports, Rooms, and Catering with a maximum of 5 food that you can request.</p>
-                <Link to="ReservationFormOne">
-                <a href="#" className="btn btn-primary">Reserve Now</a>
+                <p className="card-text">Have your wedding at our resort. Enjoy great service and a stunning setting to make your day special.</p>
+                <br></br>
+                <Link to="Reservation" className="btn btn-primary">
+                  Reserve Now
                 </Link>
               </div>
             </div>
@@ -48,9 +51,10 @@ export default function Services() {
               <img src={familyimg} className="card-img-top" alt="Team Building" />
               <div className="card-body">
                 <h5 className="card-title">Family Reunion</h5>
-                <p className="card-text">Services included: , Family Reunion Decoration, Swimming pool, Water Sports, Rooms, and Catering with a maximum of 5 food that you can request.</p>
-                <Link to="ReservationFormOne">
-                <a href="#" className="btn btn-primary">Reserve Now</a>
+                <p className="card-text">Celebrate your family reunion at our resort. Enjoy fun activities, and quality time with your loved ones. </p>
+                <br></br>
+                <Link to="Reservation" className="btn btn-primary">
+                  Reserve Now
                 </Link>
               </div>
             </div>
@@ -61,9 +65,9 @@ export default function Services() {
               <img src={teambimg} className="card-img-top" alt="Team Building" />
               <div className="card-body">
                 <h5 className="card-title">Team Building</h5>
-                <p className="card-text">Services included: MC, Team Building Decoration, Swimming Pool, Water Sport, Rooms, and Catering with a maximum of 5 food that you can request.</p>
-                <Link to="ReservationFormOne">
-                <a href="#" className="btn btn-primary">Reserve Now</a>
+                <p className="card-text">Host your team building event at our resort. Enjoy fun activities, and excellent facilities to strengthen your team's bond.</p>
+                <Link to="Reservation" className="btn btn-primary">
+                  Reserve Now
                 </Link>
               </div>
             </div>

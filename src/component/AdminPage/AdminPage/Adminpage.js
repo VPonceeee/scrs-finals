@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AdminDashboard from '../AdminDasboard/AdminDashboard';
 import ReservationRequest from '../ReservationRequest/ReservationRequest';
 import AdminCalendar from '../AdminCalendar/AdminCalendar';
-
+import ReservationHistory from '../ReservationHistory/ReservationHistory';
+import http from '../../../http';
+import { setReservation, setPendingCount} from '../../../redux/actions/libraryActions';
 
 export default function Adminpage() {
 
@@ -14,7 +17,32 @@ export default function Adminpage() {
     };
 
     /*====Navigation condition code end here====*/
+    const pendingCount = useSelector(state => state.allReservations.pendingCount);
+    const dispatch = useDispatch();
+  
 
+    const displayReservation = () => {
+      http.get('reservations')
+        .then(result => {
+          console.log('API Result:', result.data);
+          dispatch(setReservation(result.data.reservation));
+          const count = countPendingReservations(result.data.reservation);
+          dispatch(setPendingCount(count));
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    };
+    
+    const countPendingReservations = (reservations) => {
+      const pendingCount = reservations.filter(reservation => reservation.Status === 'Pending').length;
+      console.log('Number of Pending Reservations:', pendingCount);
+      return pendingCount;
+    };
+
+    useEffect(() => {
+      displayReservation();
+    }, []);
   return (
 
     <>
@@ -45,19 +73,40 @@ export default function Adminpage() {
 
                       <li className="nav-item">
 
-                          <a id='SideNavName' className="nav-link" href="#" onClick={() => handleMenuClick('dashboard')}>Dashboard</a>
+                          <button 
+                            id='SideNavName' 
+                            type="button" 
+                            class="btn"
+                            onClick={() => handleMenuClick('dashboard')}
+                          >
+                            Dashboard
+                          </button>
 
                       </li>
 
                       <li className="nav-item">
 
-                          <a id='SideNavName' className="nav-link" href="#"onClick={() => handleMenuClick('reservationRequest')}>Reservation Request</a>
+                          <button 
+                            id='SideNavName' 
+                            type="button" 
+                            class="btn"
+                            onClick={() => handleMenuClick('reservationRequest')}
+                          >
+                            Reservation Request <span className="badge text-bg-danger">{pendingCount}</span>
+                          </button>
 
                       </li>
 
                       <li className="nav-item">
 
-                          <a id='SideNavName' className="nav-link" href="#" onClick={() => handleMenuClick('reservationHistory')}>Reservation History</a>
+                          <button 
+                            id='SideNavName' 
+                            type="button" 
+                            class="btn"
+                            onClick={() => handleMenuClick('reservationHistory')}
+                          >
+                            Reservation History
+                          </button>
 
                       </li>
 
@@ -69,8 +118,8 @@ export default function Adminpage() {
           </div>
           {visibleSection === 'dashboard' && (
           <div id='AdminContentsDashboard' className="container">
-          
               <AdminDashboard/>
+              <br></br>
               <AdminCalendar/>
           </div>
 
@@ -83,6 +132,7 @@ export default function Adminpage() {
           {visibleSection === 'reservationHistory' && (
           <div id='ResevationHistory' className='container'>
               <h1>Resevation History</h1>
+              <ReservationHistory/>
           </div>
             )}
         </div>

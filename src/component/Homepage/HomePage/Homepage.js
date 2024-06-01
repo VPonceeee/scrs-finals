@@ -1,6 +1,6 @@
 import React from 'react'
 import Home from '../Home/Home'
-import Navbar from '../../Navbar/Navbar'
+//import Navbar from '../../Navbar/Navbar'
 import Facilities from '../Facilities/Facilities'
 import Services from '../Services/Services'
 
@@ -21,7 +21,12 @@ export default function Homepage() {
           <div id='FacilitiesSection'>
               <Facilities/>
           </div>
-        </div>      
+
+   
+
+        </div>  
+
+
 
       {/* <Home/>
       <Services/>

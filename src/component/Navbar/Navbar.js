@@ -40,7 +40,7 @@ export default function Navbar() {
                     <li className="nav-item">
 
                         <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'HomeSection')}>
-                            <a id='NavName' className="nav-link">Home</a>
+                            <span id='NavName' className="nav-link">Home</span>
                         </Link>
 
                     </li>
@@ -48,7 +48,7 @@ export default function Navbar() {
                     <li className="nav-item">
 
                         <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'ServicesSection')}>
-                            <a id='NavName' className="nav-link">Services</a>
+                            <span id='NavName' className="nav-link">Services</span>
                         </Link>
 
                     </li>
@@ -56,7 +56,7 @@ export default function Navbar() {
                     <li className="nav-item">
 
                         <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'FacilitiesSection')}>
-                            <a id='NavName' className="nav-link">Facilities</a>
+                            <span id='NavName' className="nav-link">Facilities</span>
                         </Link>
 
                     </li>
@@ -64,7 +64,7 @@ export default function Navbar() {
                     <li className="nav-item">
 
                         <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'ContactSection')}>
-                            <a id='NavName' className="nav-link">Contact</a>
+                            <span id='NavName' className="nav-link">Contact</span>
                         </Link>
                         
                     </li>

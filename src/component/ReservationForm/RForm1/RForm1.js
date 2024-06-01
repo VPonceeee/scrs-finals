@@ -4,9 +4,13 @@ import Invoice from './Invoice';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
+import { useDispatch,useSelector } from 'react-redux';
+import http from '../../../http';
+import {setAddReservation, setReservation } from '../../../redux/actions/libraryActions';
 
 
 export default function RForm1() {
+
     /* ====================== FORM BUTTON FUNCTION START HERE ====================== */
     const [showReservationForm, setShowReservationForm] = useState(true);
     const [showServiceForm, setShowServiceForm] = useState(false);
@@ -59,7 +63,7 @@ export default function RForm1() {
 
     /* ====================== SELECT EVENT AND FORMS FUNCTION START HERE ====================== */
     const [selectedEvent, setSelectedEvent] = useState('');
-    const [showEventForm, setShowEventForm] = useState(null);
+    
     const [FormErrors, setFormErrors] = useState({});
 
     const [formFields, setFormFields] = useState({
@@ -167,7 +171,47 @@ export default function RForm1() {
         });
     };
     
-    /* ====================== CHECKBOX AND TEXTBOXES FUNCTION END HERE ====================== */
+    /* ====================== CHECKBOX AND TEXTBOXES FUNCTION END HERE ====================== */ 
+
+    const REvent = selectedEvent === 'Other Events' ? `Other Events/${formFields.otherEvent}` : selectedEvent;
+
+    // ====================== ADD RESERVATION TO THE DATABASE CODES START HERE ======================
+        const AddReservation=()=>{
+
+            const formattedStartDate = startDate ? new Date(startDate).toISOString().slice(0, 10).replace(/-/g, "/") : "";
+            const formattedEndDate = endDate ? new Date(endDate).toISOString().slice(0, 10).replace(/-/g, "/") : "";
+
+
+            const NewReservation={
+                Fullname: formFields.firstName + " " + formFields.lastName,
+                MobileNo: formFields.mobileNumber,
+                Email: formFields.email,
+                StartDate: formattedStartDate,
+                EndDate: formattedEndDate,
+                KidsQty: formFields.kids,
+                AdultsQty: formFields.adults,
+                SeniorsQty: formFields.seniors,
+                Events: REvent,
+                Services: selectedServices,
+                CateringFoods: foodRequests,
+                GuestSubtotal: "SubtotalEF",
+                SESubtotal: "SubtotalEventService" ,
+                Discount: "Discount",
+                Total: "TotalBill",
+                Status: "Pending"
+            }
+        
+             //Database connection
+             http.post('reservations', NewReservation).then((result)=>{
+                 console.log(result.data);
+             }).catch(error=>{
+                 console.log(error.message);
+             });
+            console.log(NewReservation);
+        
+        }
+
+    // ====================== ADD RESERVATION TO THE DATABASE CODES END HERE ======================
 
     return (
         <>
@@ -228,7 +272,7 @@ export default function RForm1() {
                                     id="mobileNumber"
                                     value={formFields.mobileNumber}
                                     onChange={handleInputChange}
-                                    required
+                                    required                                         
                                 />
                                 <div className="invalid-feedback">{FormErrors.mobileNumber}</div>
                             </div>
@@ -535,7 +579,7 @@ export default function RForm1() {
                                 formData={formFields} 
                                 startDate={format(startDate, 'yyyy/MM/dd')} 
                                 endDate={format(endDate, 'yyyy/MM/dd')}
-                                selectedEvent={selectedEvent === 'Other Events' ? `Other Events/${formFields.otherEvent}` : selectedEvent}
+                                selectedEvent={REvent}
                                 selectedServices={selectedServices}
                                 selectedServicesPrices={selectedServicesPrices}
                                 SubtotalServicePrice={SubtotalServicePrice}
@@ -546,7 +590,12 @@ export default function RForm1() {
                                 <button type="button" id="FormsBackBtn" className="btn btn-lg" onClick={handleFormBackClick}>
                                     Back
                                 </button>
-                                <button type="button" id="FormsBackBtn" className="btn btn-lg" >
+                                <button 
+                                    type="button" 
+                                    id="FormsBackBtn" 
+                                    className="btn btn-lg"
+                                    onClick={() => AddReservation()}
+                                >
                                     Submit
                                 </button>
                             </div>

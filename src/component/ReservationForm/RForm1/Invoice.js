@@ -1,6 +1,5 @@
-// Invoice.js
-import React from 'react';
 
+import React, { useState } from 'react';
 
 export default function Invoice({ formData, startDate, endDate, selectedEvent, selectedServices, selectedServicesPrices, foodRequests }) {
     const { kids, adults, seniors} = formData;
@@ -33,6 +32,9 @@ export default function Invoice({ formData, startDate, endDate, selectedEvent, s
     const Discount = GetDiscount * KidSeniorDiscount;
 
     const TotalBill = parseInt(SubtotalEF) + parseInt(SubtotalEventService) - parseInt(Discount);
+
+
+
   return (
     <>
       <div id='InvoiceMainDiv' className='container'>
