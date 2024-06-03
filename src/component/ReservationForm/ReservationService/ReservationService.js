@@ -234,27 +234,35 @@ export default function ReservationService({
                         )}
 
                     </div>
+                    
 
-                    <div id='BackBtnDiv' className="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button 
-                            type="button" 
-                            id="FormsBackBtn" 
-                            className="btn btn-lg" 
-                            onClick={handleBackClick}
-                        >
-                            Back
-                        </button>
-                            
-                        <button 
-                            type="button" 
-                            id="FormsNxtBtn" 
-                            className="btn btn-lg" 
-                            onClick={handleNextClick}
-                        >                     
-                            Next
-                        </button>                      
-                    </div>
+
                 </form>
+                <div className='row'>
+                    <div className='col'>
+                        <div id='BackBtnDiv' className="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <button 
+                                type="button"                      
+                                className="btn btn-lg btn-danger" 
+                                onClick={handleBackClick}
+                            >
+                                ← Back
+                            </button>                    
+                        </div>
+                    </div>
+                    <div className=' col'>
+                        <div id='BackBtnDiv' className="d-grid gap-2 d-md-flex justify-content-md-end">                    
+                            <button 
+                                type="button" 
+                                className="btn btn-lg btn-primary" 
+                                onClick={handleNextClick}
+                            >                     
+                                Next →
+                            </button>                      
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 

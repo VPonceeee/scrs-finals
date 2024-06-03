@@ -289,26 +289,23 @@ export default function ReservationForm({
                         </div>
                     )}
 
-                    <div className="d-grid gap-2 d-md-flex justify-content-md-end"> 
-                        <button 
-                            type="button" 
-                            id="FormsNxtBtn" 
-                            className="btn btn-lg" 
-                            onClick={handleGuestRequirments}
-                        >
-                            Next
-                        </button>
 
-                        {/* <button
-                            type="button"
-                            id="ConsoleLogBtn"
-                            className="btn btn-lg"
-                            onClick={logGuestInfo}
-                        >
-                            Log Guest Info
-                        </button> */}
-                    </div>
                 </form>
+
+                <div className='row'>
+                    <div className='col'>
+                        <div id='BackBtnDiv' className="d-grid gap-2 d-md-flex justify-content-md-end"> 
+                            <button 
+                                type="button" 
+                                className="btn btn-lg btn-primary" 
+                                onClick={handleGuestRequirments}
+                            >
+                                Next →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 

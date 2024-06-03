@@ -226,6 +226,16 @@ html {
     margin-top: 30px;
 }
 
+.alert-container {
+    position: fixed;
+    top: 120px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999; /* Ensure it appears above other elements */
+    width: 80%; /* Optional: Adjust width */
+    max-width: 500px; /* Optional: Limit the maximum width */
+    text-align: center;
+}
 /*=====================RESERVATION FORM STYLE END HERE=============================*/
 
 /*=====================ABOUT PAGE STYLE START HERE=============================*/

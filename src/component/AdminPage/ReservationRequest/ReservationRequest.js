@@ -194,6 +194,9 @@ export default function ReservationRequest() {
                   <p><strong>Food Requests:</strong> {modalData.CateringFoods}</p>
                   <p><strong>Total Bill:</strong> ₱{modalData.Total}</p>
                   <p><strong>Status:</strong> {modalData.Status}</p>
+                  <p><strong>Proof Of Payment:</strong></p>
+                  <img src={modalData.ReservationFee} className="img-fluid" style={{ maxWidth: '100%', maxHeight: '400px' }}></img>
+                  
                 </div>
               )}
             </div>
