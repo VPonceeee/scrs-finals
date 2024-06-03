@@ -28,6 +28,7 @@ class Reservation extends Model
         'SESubtotal',
         'Discount',
         'Total',
-        'Status'        
+        'Status',
+        'ReservationFee'        
     ];
 }

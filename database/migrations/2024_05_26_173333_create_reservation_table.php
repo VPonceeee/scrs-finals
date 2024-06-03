@@ -31,6 +31,7 @@ return new class extends Migration
             $table->integer('Discount');
             $table->integer('Total');
             $table->string('Status');
+            $table->string('ReservationFee');
 
             $table->timestamps();
         });

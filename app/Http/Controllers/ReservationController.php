@@ -44,6 +44,7 @@ class ReservationController extends Controller
             'Discount' => 'required|integer|min:0',
             'Total' => 'required|integer|min:0',
             'Status' => 'required|string|max:255',
+            'ReservationFee' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -72,7 +73,8 @@ class ReservationController extends Controller
                 'SESubtotal' => $request->SESubtotal,
                 'Discount' => $request->Discount,
                 'Total' => $request->Total,
-                'Status' => $request->Status
+                'Status' => $request->Status,
+                'ReservationFee' => $request->ReservationFee
             ]);
 
             if ($reservation) {
