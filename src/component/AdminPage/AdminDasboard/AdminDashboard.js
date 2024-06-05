@@ -71,14 +71,18 @@ export default function AdminDashboard() {
 
     return (
         <>
-            <h1>Dashboard</h1>
+            <div id='SearchDiv'>
+                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Search"/>
+
+            </div>
             <table className="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Fullname</th>
                         <th scope="col">Contact</th>
                         <th scope="col">Event</th>
-                        <th scope="col">Date of Reservation</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -90,7 +94,8 @@ export default function AdminDashboard() {
                                 <td>{showReservation.Fullname}</td>
                                 <td>{showReservation.MobileNo}</td>
                                 <td>{showReservation.Events}</td>
-                                <td>{showReservation.StartDate} - {showReservation.EndDate}</td>
+                                <td>{showReservation.StartDate}</td>
+                                <td>{showReservation.EndDate}</td>
                                 <td>{showReservation.Status}</td>
                                 <td>
                                 <div className='ActionBtn'>

@@ -7,11 +7,10 @@ import Login from './component/AdminPage/Login/Login';
 import Navbar from './component/Navbar/Navbar';
 import ReservationPage from './component/ReservationForm/ReservationPage/ReservationPage';
 import './App.css';
+import ProtectedRoute from './component/AdminPage/Login/ProtectedRoute';
 
 function App() {
   const location = useLocation();
-
-  // Paths where the Navbar should be hidden
   const hideNavbarPaths = ['/Sucasaadminloginpage', '/Sucasaadminpage'];
 
   return (
@@ -23,7 +22,14 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="Reservation" element={<ReservationPage />} />
         <Route path="/Sucasaadminloginpage" element={<Login />} />
-        <Route path="/Sucasaadminpage" element={<Adminpage />} />
+        <Route 
+          path="/Sucasaadminpage"
+          element={
+            <ProtectedRoute>
+              <Adminpage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<Navigate to="/Sucasaadminloginpage" />} />
       </Routes>
     </div>

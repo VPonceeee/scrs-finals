@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 
 html {
@@ -112,6 +111,7 @@ html {
     width: 19rem;
     text-align: center;
     background-color: #f8f9fa;
+   
 }
 
 #ServiceMainDiv{
@@ -240,18 +240,27 @@ html {
 
 /*=====================ABOUT PAGE STYLE START HERE=============================*/
 
-
+#FacilitiesSection{
+    background-color: #f2f2f2;
+}
 
 #AboutMainDiv{
     height: 100%;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 #CardDiv{
     background-color: #f8f9fa;
 }
 
-
+#AboutText{
+    font-size: 20px;
+}
 /*=====================ABOUT PAGE STYLE END HERE=============================*/
 
 
@@ -366,6 +375,7 @@ html {
     background-color: rgba(255, 255, 255, 0.2);
     cursor: pointer;
   }
+
 /*=====================ADMIN PAGE STYLE END HERE=============================*/
 
 

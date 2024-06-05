@@ -9,13 +9,17 @@ export default function ReservationRequest() {
 
 
   // ========================== DISPLAY THE DATA FROM THE DATABASE CODES START HERE ==========================
-   
+    const sortReservations = (reservations) => {
+      return reservations.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    };
+
     const displayReservation = () => {
       http.get('reservations')
         .then(result => {
-          console.log('API Result:', result.data);
-          dispatch(setReservation(result.data.reservation));
-          const count = countPendingReservations(result.data.reservation);
+          console.log('API Result:', result.data);  
+          const sortedReservations = sortReservations(result.data.reservation);
+          dispatch(setReservation(sortedReservations));
+          const count = countPendingReservations(sortedReservations);
           dispatch(setPendingCount(count));
         })
         .catch(error => {
@@ -127,7 +131,7 @@ export default function ReservationRequest() {
 
         <tbody>
           {Array.isArray(reservations) && reservations.length > 0 ? (
-            reservations.filter(reservation => reservation.Status === 'Pending').map(showReservation => (
+            reservations.filter(reservation => reservation.Status === 'Pending').reverse().map(showReservation => (
               <tr key={showReservation.ReservationId}>
                 <td>{showReservation.Fullname}</td>
                 <td>{showReservation.MobileNo}</td>

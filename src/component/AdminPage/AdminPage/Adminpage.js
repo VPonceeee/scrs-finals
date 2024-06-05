@@ -118,9 +118,10 @@ export default function Adminpage() {
           </div>
           {visibleSection === 'dashboard' && (
           <div id='AdminContentsDashboard' className="container">
-              <AdminDashboard/>
-              <br></br>
+              <h1>Dashboard</h1>
               <AdminCalendar/>
+              <br></br>
+              <AdminDashboard/>
           </div>
 
           )} {visibleSection === 'reservationRequest' && (
