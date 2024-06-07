@@ -6,6 +6,9 @@ import AdminCalendar from '../AdminCalendar/AdminCalendar';
 import ReservationHistory from '../ReservationHistory/ReservationHistory';
 import http from '../../../http';
 import { setReservation, setPendingCount} from '../../../redux/actions/libraryActions';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Login/authentication'; 
+
 
 export default function Adminpage() {
 
@@ -43,100 +46,125 @@ export default function Adminpage() {
     useEffect(() => {
       displayReservation();
     }, []);
+
+    const { login, logout, isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+    const handleLogout = () => {
+      logout();
+      navigate('/Sucasaadminpage');
+    };
+
   return (
 
     <>
+      <nav className="navbar navbar-expand-lg bg-body-primary fixed-top">
+          <div className="container-fluid">
+            <button 
+              className="navbar-toggler me-3" 
+              type="button" 
+              data-bs-toggle="offcanvas" 
+              data-bs-target="#SidePanelMenu" 
+              aria-controls="SidePanelMenu"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
 
-      <div className="d-flex">
-          <div className="sidebar">
-            <nav id="SideBarMenubtn" className="navbar navbar-dark d-lg-none">
-              <div className="container-fluid">
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#Sidebar"
-                  aria-controls="Sidebar"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span className="navbar-toggler-icon"></span>
-                </button>
-              </div>
-            </nav>
+            <a id='AdminMenu' className="navbar-brand fw-bold me-auto">SU-CASA-ADMIN</a>
 
-            <div id="Sidebar" className="collapse d-lg-block " data-bs-theme="dark">
-              <div id="SideBarPanel" className='container-fluid'>
-                <h1 className="text-body-emphasis h4">Admin Menu</h1>
-
-                  <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-
-                      <li className="nav-item">
-
-                          <button 
-                            id='SideNavName' 
-                            type="button" 
-                            class="btn"
-                            onClick={() => handleMenuClick('dashboard')}
-                          >
-                            Dashboard
-                          </button>
-
-                      </li>
-
-                      <li className="nav-item">
-
-                          <button 
-                            id='SideNavName' 
-                            type="button" 
-                            class="btn"
-                            onClick={() => handleMenuClick('reservationRequest')}
-                          >
-                            Reservation Request <span className="badge text-bg-danger">{pendingCount}</span>
-                          </button>
-
-                      </li>
-
-                      <li className="nav-item">
-
-                          <button 
-                            id='SideNavName' 
-                            type="button" 
-                            class="btn"
-                            onClick={() => handleMenuClick('reservationHistory')}
-                          >
-                            Reservation History
-                          </button>
-
-                      </li>
-
-
-                  </ul>
-
-              </div>
-            </div>
           </div>
-          {visibleSection === 'dashboard' && (
-          <div id='AdminContentsDashboard' className="container">
+        </nav>
+
+      <div className="offcanvas offcanvas-start bg-primary" tabindex="-1" id="SidePanelMenu" aria-labelledby="SidePanelMenuLabel">
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title fw-bold" id='AdminMenu'>Menu</h5>
+        </div>
+     
+        <div className="offcanvas-body p-1 mt-2">
+          
+          <button 
+            id='SideNavName' 
+            type="button" 
+            className="btn"
+            onClick={() => handleMenuClick('dashboard')}
+            style={{ textAlign: 'start'}}
+           >
+              <span className=' me-2'>
+                <i class="bi bi-speedometer2"> </i>
+              </span>
+              <label className='fw-bold'>Dashboard</label>  
+
+          </button>                
+         
+          <button 
+            id='SideNavName' 
+            type="button" 
+            className="btn"
+            onClick={() => handleMenuClick('reservationRequest')}
+            style={{ textAlign: 'start' }}
+          >
+            <span className=' me-2'>
+              <i class="bi bi-calendar"> </i>
+            </span>
+            <label className='fw-bold'>Reservation Request  <span className="badge text-bg-danger">{pendingCount}</span></label> 
+                     
+          </button>
+           
+          <button 
+            id='SideNavName' 
+            type="button" 
+            className="btn"
+            onClick={() => handleMenuClick('reservationHistory')}
+            style={{ textAlign: 'start' }}
+          >
+            <span className=' me-2'>
+              <i class="bi bi-clock-history"> </i>
+            </span>
+            <label className='fw-bold'>Reservation History </label> 
+                      
+          </button>
+
+          <button 
+            id='SideNavName' 
+            type="button" 
+            className="btn fixed-bottom mb-3"
+            onClick={handleLogout}
+            style={{ textAlign: 'start' }}
+          >
+            <span className=' me-2'>
+              <i class="bi bi-box-arrow-left"></i>
+            </span>
+            <label className='fw-bold'>LogOut</label> 
+                      
+          </button>
+        </div>
+      </div>
+
+      <div className='APMain'>
+      {visibleSection === 'dashboard' && (
+          <div id='AdminContentsDashboard' classNameName="container">
               <h1>Dashboard</h1>
+              <hr></hr>
               <AdminCalendar/>
               <br></br>
               <AdminDashboard/>
           </div>
 
           )} {visibleSection === 'reservationRequest' && (
-          <div id='ResevationRequest' className='container'>
+          <div id='ResevationRequest' classNameName='container'>
               <h1>Resevation Request</h1>
+              <hr></hr>
               <ReservationRequest/>
           </div>
           )} 
           {visibleSection === 'reservationHistory' && (
-          <div id='ResevationHistory' className='container'>
+          <div id='ResevationHistory' classNameName='container'>
               <h1>Resevation History</h1>
+              <hr></hr>
               <ReservationHistory/>
           </div>
             )}
-        </div>
+
+      </div>
 
     </>
 

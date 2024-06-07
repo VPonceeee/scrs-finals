@@ -19,6 +19,12 @@ export default function Login() {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
   return (
     <div id='AdminMainDiv' className='container-fluid'>
       <div id='LoginMainDiv' className='container'>
@@ -27,13 +33,27 @@ export default function Login() {
         </div>
         <div className='AdminForm'>
           <div id='Admintxtbox' className="form-floating mb-3">
-            <input type="email" className="form-control" id="Username" placeholder="name@example.com" value={username}
-              onChange={(e) => setUsername(e.target.value)} />
+            <input 
+              type="email" 
+              className="form-control" 
+              id="Username" 
+              placeholder="name@example.com" 
+              value={username}
+              onChange={(e) => setUsername(e.target.value)} 
+              onKeyDown={handleKeyDown}
+            />
             <label htmlFor="floatingInput">Username</label>
           </div>
           <div id='Admintxtbox' className="form-floating">
-            <input type="password" className="form-control" id="Password" placeholder="Password" value={password}
-              onChange={(e) => setPassword(e.target.value)} />
+            <input 
+              type="password" 
+              className="form-control" 
+              id="Password" 
+              placeholder="Password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)} 
+              onKeyDown={handleKeyDown}
+            />
             <label htmlFor="floatingPassword">Password</label>
           </div>
           <button type="button" id="LoginBtn" className="btn btn-lg" onClick={handleLogin}>

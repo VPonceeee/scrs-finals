@@ -53,25 +53,34 @@ export default function AdminCalendar() {
 // ========================== DISPLAY THE DATA FROM THE DATABASE CODES END HERE ==========================
 
 // ========================== DISPLAY RESERVATION TO THE CALENDAR CODES START HERE ==========================
-  const filteredReservations = reservations.filter(reservation => reservation.Status === "Reserved");
+  const filteredReservations = reservations.filter(reservation => reservation.Status === "Reserved" || reservation.Status === "Completed");
 
   const events = filteredReservations.map(reservation => ({
     title: `${reservation.Fullname} - ${reservation.Events}`,
     start: new Date(reservation.StartDate),
-    end: new Date(reservation.EndDate)
-    
+    end: new Date(reservation.EndDate),
+    status: reservation.Status
   }));
 
+  
+
   const Highlight = (event) => {
+    let backgroundColor = '';
+    if (event.status === 'Reserved') {
+      backgroundColor = 'green';
+    } else if (event.status === 'Done') {
+      backgroundColor = 'blue';
+    }
+
     return {
       style: {
-        backgroundColor: 'green',
+        backgroundColor,
         borderRadius: '0px',
         opacity: 0.8,
         color: 'white',
         border: '0px',
-        display: 'block'
-      }
+        display: 'block',
+      },
     };
   };
 

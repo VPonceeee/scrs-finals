@@ -40,7 +40,7 @@ export default function ReservationService({
 
     // ==================== SERVICES CHECKBOX FUNCTION CODES START HERE ====================
 
-        const SubtotalServicePrice = Object.values(SelectedServicesPrices).reduce((acc, curr) => acc + curr, 0);
+        //const SubtotalServicePrice = Object.values(SelectedServicesPrices).reduce((acc, curr) => acc + curr, 0);
         
 
         const [ServicePrices, setServicePrices] = useState({

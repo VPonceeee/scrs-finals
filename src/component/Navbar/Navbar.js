@@ -24,56 +24,64 @@ export default function Navbar() {
 
             <div className="container-fluid">
 
-            <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'HomeSection')}>
-                <a id='NavName' className="nav-link">Su Casa Resort</a>
-            </Link>
+                <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'HomeSection')}>
+                    <span id='NavName' className="nav-link fw-bold">Su Casa Resort</span>
+                </Link>
             
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <button 
+                    className="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarText" 
+                    aria-controls="navbarText" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation"
+                >
+                    <span className="navbar-toggler-icon"></span>
+                </button>
 
-                <span className="navbar-toggler-icon"></span>
+            
 
-            </button>
+                <div className="collapse navbar-collapse ms-5 " id="navbarText">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
-            <div className="collapse navbar-collapse ms-5 " id="navbarText">
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
 
-                    <li className="nav-item">
+                            <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'HomeSection')}>
+                                <span id='NavName' className="nav-link">Home</span>
+                            </Link>
 
-                        <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'HomeSection')}>
-                            <span id='NavName' className="nav-link">Home</span>
-                        </Link>
+                        </li>
 
-                    </li>
+                        <li className="nav-item">
 
-                    <li className="nav-item">
+                            <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'ServicesSection')}>
+                                <span id='NavName' className="nav-link">Services</span>
+                            </Link>
 
-                        <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'ServicesSection')}>
-                            <span id='NavName' className="nav-link">Services</span>
-                        </Link>
+                        </li>
 
-                    </li>
+                        <li className="nav-item">
 
-                    <li className="nav-item">
+                            <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'FacilitiesSection')}>
+                                <span id='NavName' className="nav-link">Facilities</span>
+                            </Link>
 
-                        <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'FacilitiesSection')}>
-                            <span id='NavName' className="nav-link">Facilities</span>
-                        </Link>
+                        </li>
 
-                    </li>
+                        <li className="nav-item">
 
-                    <li className="nav-item">
+                            <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'ContactSection')}>
+                                <span id='NavName' className="nav-link">Contact</span>
+                            </Link>
+                            
+                        </li>
 
-                        <Link id='LinkNav' to="/" onClick={(e) => handleScroll(e, 'ContactSection')}>
-                            <span id='NavName' className="nav-link">Contact</span>
-                        </Link>
-                        
-                    </li>
+                    </ul>
 
-                </ul>
+                </div>
 
             </div>
-
-        </div>
 
         </nav>
         

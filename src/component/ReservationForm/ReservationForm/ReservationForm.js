@@ -298,9 +298,10 @@ export default function ReservationForm({
                             <button 
                                 type="button" 
                                 className="btn btn-lg btn-primary" 
-                                onClick={handleGuestRequirments}
-                            >
-                                Next →
+                                onClick={handleGuestRequirments}                                
+                            >                                
+                                Next
+                                
                             </button>
                         </div>
                     </div>

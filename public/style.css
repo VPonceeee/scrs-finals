@@ -265,7 +265,7 @@ html {
 
 
 
-/*=====================ADMIN PAGE STYLE START HERE=============================*/
+/*=====================AdminPage STYLE START HERE=============================*/
 
 #AdminMainDiv{
     width: 99%;
@@ -333,14 +333,25 @@ html {
 #Sidebar{
     background-color: #0f66e9;
 }
+
 #SideBarPanel{
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color: #0f66e9;
+    /* background-color: #0f66e9; */
     padding-top: 30px;
-    gap: 50px;
+    /* gap: 50px; */
+    width: 300px;
 
+
+}
+
+#AdminMenuDiv
+{
+    text-align: center;
+}
+#AdminMenu{
+    color: whitesmoke;
 }
 
 #SideBarMenubtn{
@@ -369,6 +380,7 @@ html {
 #SideNavName{
     color: whitesmoke;
     font-size: 20px;
+    width: 100%;
 }
 
 #SideNavName:hover {
@@ -376,7 +388,54 @@ html {
     cursor: pointer;
   }
 
-/*=====================ADMIN PAGE STYLE END HERE=============================*/
+  #SideLabel
+  {
+    text-align: start;
+  }
+
+/*----------------------------*/
+
+:root{
+    --offcanvas-width: 320px;
+    --TopPanelMenu: 56px;
+}
+
+#SidePanelMenu{
+    width: var(--offcanvas-width);
+}
+
+@media (min-width:992px){
+    body
+    {
+        overflow: auto !important;
+    }
+
+    .APMain
+    {
+        margin-left: var(--offcanvas-width);
+        padding-left: 40px;
+        margin-right: 20px;
+        padding-right: 20px;
+        margin-top: 20px;
+        padding-top: 20px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+    .offcanvas-backdrop::before
+    {
+        display: none;
+    }
+    #SidePanelMenu 
+    {
+        transform: none;
+        visibility: visible !important;
+        top: var(--TopPanelMenu);
+        height: calc(100% - var);
+    }
+}
+
+
+/*=====================AdminPage STYLE END HERE=============================*/
 
 
 
@@ -403,3 +462,4 @@ html {
 
 
 /*==============================BUTTONS CSS STYLE END HERE==============================*/
+

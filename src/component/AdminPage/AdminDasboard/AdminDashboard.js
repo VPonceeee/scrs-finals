@@ -35,7 +35,7 @@ export default function AdminDashboard() {
     if (singleReservation) {
       console.log('Single Reservation before update:', singleReservation);
 
-      singleReservation.Status = "Done";
+      singleReservation.Status = "Completed";
 
       CompleteReservation(singleReservation);
     } else {
@@ -69,89 +69,93 @@ export default function AdminDashboard() {
         modal.show();
     };
 
+
     return (
         <>
-            <div id='SearchDiv'>
-                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Search"/>
-
+            <div className='container'>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                <button class="btn btn-primary" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
             </div>
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Fullname</th>
-                        <th scope="col">Contact</th>
-                        <th scope="col">Event</th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">End Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {Array.isArray(reservations) && reservations.length > 0 ? (
-                        reservations.filter(reservation => reservation.Status === 'Reserved').map(showReservation => (
-                            <tr key={showReservation.ReservationId}>
-                                <td>{showReservation.Fullname}</td>
-                                <td>{showReservation.MobileNo}</td>
-                                <td>{showReservation.Events}</td>
-                                <td>{showReservation.StartDate}</td>
-                                <td>{showReservation.EndDate}</td>
-                                <td>{showReservation.Status}</td>
-                                <td>
-                                <div className='ActionBtn'>
-                                    <button
-                                    className="btn btn-primary"
-                                    onClick={() => handleViewClick(showReservation)}
-                                    >
-                                    View
-                                    </button>
-                                    <button
-                                    type="button"
-                                    className="btn btn-success"
-                                    onClick={() => getReservationId(showReservation.ReservationId)}
-                                    >
-                                    Complete
-                                    </button>
 
-                                </div>
-                                </td>
-                            </tr>
-                        ))
-                    ) : (
+                <table className="table table-striped">
+                    <thead>
                         <tr>
-                            <td colSpan="7">No reservations available</td>
+                            <th scope="col">Fullname</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Event</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
                         </tr>
-                    )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {Array.isArray(reservations) && reservations.length > 0 ? (
+                            reservations.filter(reservation => reservation.Status === 'Reserved') .slice(0, 7).map(showReservation => (
+                                <tr key={showReservation.ReservationId}>
+                                    <td>{showReservation.Fullname}</td>
+                                    <td>{showReservation.MobileNo}</td>
+                                    <td>{showReservation.Events}</td>
+                                    <td>{showReservation.StartDate}</td>
+                                    <td>{showReservation.EndDate}</td>
+                                    <td>{showReservation.Status}</td>
+                                    <td>
+                                    <div className='ActionBtn'>
+                                        <button
+                                        className="btn btn-primary"
+                                        onClick={() => handleViewClick(showReservation)}
+                                        >
+                                        View
+                                        </button>
+                                        <button
+                                        type="button"
+                                        className="btn btn-success"
+                                        onClick={() => getReservationId(showReservation.ReservationId)}
+                                        >
+                                        Complete
+                                        </button>
 
-            <div className="modal fade" id="viewModal" tabIndex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="viewModalLabel">View Full Details</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            {modalData && (
-                                <div>
-                                    <p><strong>Full Name:</strong> {modalData.Fullname}</p>
-                                    <p><strong>Mobile Number:</strong> {modalData.MobileNo}</p>
-                                    <p><strong>Email:</strong> {modalData.Email}</p>
-                                    <p><strong>Date of Reservation:</strong> {modalData.StartDate} - {modalData.EndDate}</p>
-                                    <p><strong>Kids#:</strong> {modalData.KidsQty}</p>
-                                    <p><strong>Adults#:</strong> {modalData.AdultsQty}</p>
-                                    <p><strong>Seniors#:</strong> {modalData.SeniorsQty}</p>
-                                    <p><strong>Event:</strong> {modalData.Events}</p>
-                                    <p><strong>Services:</strong> {modalData.Services}</p>
-                                    <p><strong>Food Requests:</strong> {modalData.CateringFoods}</p>  
-                                    <p><strong>Total Bill:</strong> ₱{modalData.Total}</p>                                     
-                                    <p><strong>Status:</strong> {modalData.Status}</p>
-                                </div>
-                            )}
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="7">No reservations available</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+
+                <div className="modal fade" id="viewModal" tabIndex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="viewModalLabel">View Full Details</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                {modalData && (
+                                    <div>
+                                        <p><strong>Full Name:</strong> {modalData.Fullname}</p>
+                                        <p><strong>Mobile Number:</strong> {modalData.MobileNo}</p>
+                                        <p><strong>Email:</strong> {modalData.Email}</p>
+                                        <p><strong>Date of Reservation:</strong> {modalData.StartDate} - {modalData.EndDate}</p>
+                                        <p><strong>Kids#:</strong> {modalData.KidsQty}</p>
+                                        <p><strong>Adults#:</strong> {modalData.AdultsQty}</p>
+                                        <p><strong>Seniors#:</strong> {modalData.SeniorsQty}</p>
+                                        <p><strong>Event:</strong> {modalData.Events}</p>
+                                        <p><strong>Services:</strong> {modalData.Services}</p>
+                                        <p><strong>Food Requests:</strong> {modalData.CateringFoods}</p>  
+                                        <p><strong>Total Bill:</strong> ₱{modalData.Total}</p>                                     
+                                        <p><strong>Status:</strong> {modalData.Status}</p>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
