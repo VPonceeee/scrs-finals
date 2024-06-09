@@ -21,6 +21,8 @@ export default function AdminDashboard() {
 
     useEffect(() => {
         displayReservation();
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new window.bootstrap.Tooltip(tooltipTriggerEl));
     }, []);
 
     // ========================== DISPLAY THE DATA FROM THE DATABASE CODES END HERE ==========================
@@ -61,6 +63,7 @@ export default function AdminDashboard() {
 
 // ========================== UPDATE THE DATA FROM THE DATABASE CODES END HERE ==========================
 
+// ========================== MODAL CODES START HERE ==========================
     const [modalData, setModalData] = useState(null);
 
     const handleViewClick = data => {
@@ -68,15 +71,12 @@ export default function AdminDashboard() {
         const modal = new window.bootstrap.Modal(document.getElementById('viewModal'));
         modal.show();
     };
+// ========================== MODAL CODES END HERE ==========================
 
 
     return (
         <>
             <div className='container'>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2"/>
-                <button class="btn btn-primary" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
-            </div>
 
                 <table className="table table-striped">
                     <thead>
@@ -84,18 +84,22 @@ export default function AdminDashboard() {
                             <th scope="col">Fullname</th>
                             <th scope="col">Contact</th>
                             <th scope="col">Event</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">End Date</th>
+                            <th scope="col">Start Date<br/>(YY-MM-DD)</th>
+                            <th scope="col">End Date<br/>(YY-MM-DD)</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {Array.isArray(reservations) && reservations.length > 0 ? (
-                            reservations.filter(reservation => reservation.Status === 'Reserved') .slice(0, 7).map(showReservation => (
+                            reservations
+                            .filter(reservation => reservation.Status === 'Reserved') 
+                            .sort((a, b) => new Date(a.StartDate) - new Date(b.StartDate))
+                            .slice(0, 7)
+                            .map(showReservation => (
                                 <tr key={showReservation.ReservationId}>
                                     <td>{showReservation.Fullname}</td>
-                                    <td>{showReservation.MobileNo}</td>
+                                    <td>{showReservation.Email} <br/>{showReservation.MobileNo}</td>
                                     <td>{showReservation.Events}</td>
                                     <td>{showReservation.StartDate}</td>
                                     <td>{showReservation.EndDate}</td>
@@ -103,19 +107,24 @@ export default function AdminDashboard() {
                                     <td>
                                     <div className='ActionBtn'>
                                         <button
-                                        className="btn btn-primary"
-                                        onClick={() => handleViewClick(showReservation)}
+                                            className="btn btn-primary"
+                                            onClick={() => handleViewClick(showReservation)}
+                                            data-bs-toggle="tooltip"
+                                            title="View"
                                         >
-                                        View
-                                        </button>
+                                            <i class="bi bi-eye"></i>
+                                        </button>                  
+     
                                         <button
-                                        type="button"
-                                        className="btn btn-success"
-                                        onClick={() => getReservationId(showReservation.ReservationId)}
+                                            type="button"
+                                            className="btn btn-success"
+                                            onClick={() => getReservationId(showReservation.ReservationId)}
+                                            data-bs-toggle="tooltip"
+                                            title="Complete"
                                         >
-                                        Complete
+                                            <i class="bi bi-check-circle"></i>
                                         </button>
-
+                                        
                                     </div>
                                     </td>
                                 </tr>

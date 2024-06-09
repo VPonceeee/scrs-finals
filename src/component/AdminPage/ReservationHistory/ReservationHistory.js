@@ -1,120 +1,199 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import http from '../../../http';
-import { setReservation, setSelectedReservation } from '../../../redux/actions/libraryActions';
+import { setReservation } from '../../../redux/actions/libraryActions';
 
 export default function ReservationHistory() {
-
     const reservations = useSelector(state => state.allReservations.reservations);
     const dispatch = useDispatch();
   
-    // ========================== DISPLAY THE DATA FROM THE DATABASE CODES START HERE ==========================
-        const displayReservation = () => {
+// ========================== DISPLAY THE DATA FROM THE DATABASE CODES START HERE ==========================
+    const displayReservation = () => {
         http.get('reservations')
             .then(result => {
-            console.log('API Result:', result.data);
-            dispatch(setReservation(result.data.reservation));
+                console.log('API Result:', result.data);
+                dispatch(setReservation(result.data.reservation));
             })
             .catch(error => {
-            console.log('API Error:', error.message);
+                console.log('API Error:', error.message);
             });
-        };
+    };
     
-        useEffect(() => {
+    useEffect(() => {
         displayReservation();
-        }, []);
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new window.bootstrap.Tooltip(tooltipTriggerEl));
+    }, []);
+// ========================== DISPLAY THE DATA FROM THE DATABASE CODES END HERE ==========================
 
-    // ========================== DISPLAY THE DATA FROM THE DATABASE CODES END HERE ==========================
-
+// ========================== MODAL CODES START HERE ==========================
     
-
     const [modalData, setModalData] = useState(null);
+    const [completedChecked, setCompletedChecked] = useState(false);
+    const [declinedChecked, setDeclinedChecked] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const handleViewClick = (data) => {
-      setModalData(data);
-      const modal = new window.bootstrap.Modal(document.getElementById('viewModal'));
-      modal.show();
+        setModalData(data);
+        const modal = new window.bootstrap.Modal(document.getElementById('viewModal'));
+        modal.show();
+    };
+// ========================== MODAL CODES END HERE ==========================
+
+// ========================== FILTER AND SEARCH THE DATA FROM THE DATABASE CODES START HERE ==========================
+    const filterReservations = () => {
+        return reservations.filter(reservation => 
+            ((completedChecked && reservation.Status === 'Completed') || 
+            (declinedChecked && reservation.Status === 'Declined') ||
+            (!completedChecked && !declinedChecked && (reservation.Status === 'Completed' || reservation.Status === 'Declined'))) &&
+            reservation.Fullname.toLowerCase().includes(searchTerm.toLowerCase())
+        );
     };
 
-  return (
-    <>
-        <div className='container'>
-            <table className="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Fullname</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">Event</th>
-                    <th scope="col">Date of Reservation</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
+    const handleCompletedChange = () => {
+        setCompletedChecked(!completedChecked);
+    };
 
-                <tbody>
-                {Array.isArray(reservations) && reservations.length > 0 ? (
-                    reservations.filter(reservation => reservation.Status === 'Declined' || reservation.Status ==='Completed').map(showReservation => (
-                    <tr key={showReservation.ReservationId}>
-                        <td>{showReservation.ReservationId}</td>
-                        <td>{showReservation.Fullname}</td>
-                        <td>{showReservation.MobileNo}</td>
-                        <td>{showReservation.Events}</td>
-                        <td>{showReservation.StartDate} - {showReservation.EndDate}</td>
-                        <td>{showReservation.Status}</td>
-                        <td>
-                        <div className='ActionBtn'>
-                            <button
-                            className="btn btn-primary"
-                            onClick={() => handleViewClick(showReservation)}
-                            >
-                            View
+    const handleDeclinedChange = () => {
+        setDeclinedChecked(!declinedChecked);
+    };
+
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleSearchClick = () => {
+        filterReservations();
+    };
+// ========================== FILTER AND SEARCH THE DATA FROM THE DATABASE CODES END HERE ==========================
+
+    return (
+        <>
+            <div className='container'>
+                <div className="d-flex align-items-end flex-row gap-2 mb-3 ">
+                    <div className='col d-flex flex-row gap-2'>
+                        <div className="input-group gap-1">
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                placeholder="Search" 
+                                aria-label="Search" 
+                                aria-describedby="button-addon2" 
+                                value={searchTerm} 
+                                onChange={handleSearchChange}
+                            />
+                            <button className="btn btn-primary" type="button" id="button-addon2" onClick={handleSearchClick}>
+                                <i className="bi bi-search"></i>
                             </button>
                         </div>
-                        </td>
-                    </tr>
-                    ))
-                ) : (
-                    <tr>
-                    <td colSpan="7">No reservations available</td>
-                    </tr>
-                )}
-                </tbody>
-            </table>
+                        <button className="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filter
+                        </button>
 
-            <div className="modal fade" id="viewModal" tabIndex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header">
-                    <h5 className="modal-title" id="viewModalLabel">View Full Details</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <ul className="dropdown-menu">
+                            <div className="form-check ms-2">
+                                <input 
+                                    className="form-check-input" 
+                                    type="checkbox" 
+                                    value="" 
+                                    id="completedCheck" 
+                                    checked={completedChecked} 
+                                    onChange={handleCompletedChange}
+                                />
+                                <label className="form-check-label" htmlFor="completedCheck">Completed</label>
+                            </div>
+                            <div className="form-check ms-2">
+                                <input 
+                                    className="form-check-input" 
+                                    type="checkbox" 
+                                    value="" 
+                                    id="declinedCheck" 
+                                    checked={declinedChecked} 
+                                    onChange={handleDeclinedChange}
+                                />
+                                <label className="form-check-label" htmlFor="declinedCheck">Declined</label>
+                            </div>
+                        </ul>
                     </div>
-                    <div className="modal-body">
-                    {modalData && (
-                        <div>
-                        <p><strong>Full Name:</strong> {modalData.Fullname}</p>
-                        <p><strong>Mobile Number:</strong> {modalData.MobileNo}</p>
-                        <p><strong>Email:</strong> {modalData.Email}</p>
-                        <p><strong>Date of Reservation:</strong> {modalData.StartDate} - {modalData.EndDate}</p>
-                        <p><strong>Kids#:</strong> {modalData.KidsQty}</p>
-                        <p><strong>Adults#:</strong> {modalData.AdultsQty}</p>
-                        <p><strong>Seniors#:</strong> {modalData.SeniorsQty}</p>
-                        <p><strong>Event:</strong> {modalData.Events}</p>
-                        <p><strong>Services:</strong> {modalData.Services}</p>
-                        <p><strong>Food Requests:</strong> {modalData.CateringFoods}</p>
-                        <p><strong>Total Bill:</strong> ₱{modalData.Total}</p>
-                        <p><strong>Status:</strong> {modalData.Status}</p>
-                        <img src={modalData.ReservationFee} className="img-fluid" style={{ maxWidth: '100%', maxHeight: '400px' }}></img>
+                </div>
+                
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Fullname</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Event</th>
+                            <th scope="col">Start Date<br/>(YY-MM-DD)</th>
+                            <th scope="col">End Date<br/>(YY-MM-DD)</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Array.isArray(reservations) && reservations.length > 0 ? (
+                            filterReservations().map(showReservation => (
+                                <tr key={showReservation.ReservationId}>
+                                    <td>{showReservation.Fullname}</td>
+                                    <td>{showReservation.Email} <br/>{showReservation.MobileNo}</td>
+                                    <td>{showReservation.Events}</td>
+                                    <td>{showReservation.StartDate}</td>
+                                    <td>{showReservation.EndDate}</td>
+                                    <td>{showReservation.Status}</td>
+                                    <td>
+                                        <div className='ActionBtn'>
+                                            <button
+                                                className="btn btn-primary"
+                                                onClick={() => handleViewClick(showReservation)}
+                                                data-bs-toggle="tooltip"
+                                                title="View"
+                                            >
+                                                <i className="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="7">No reservations available</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+
+                <div className="modal fade" id="viewModal" tabIndex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="viewModalLabel">View Full Details</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                {modalData && (
+                                    <div>
+                                        <p><strong>Full Name:</strong> {modalData.Fullname}</p>
+                                        <p><strong>Mobile Number:</strong> {modalData.MobileNo}</p>
+                                        <p><strong>Email:</strong> {modalData.Email}</p>
+                                        <p><strong>Date of Reservation:</strong> {modalData.StartDate} - {modalData.EndDate}</p>
+                                        <p><strong>Kids#:</strong> {modalData.KidsQty}</p>
+                                        <p><strong>Adults#:</strong> {modalData.AdultsQty}</p>
+                                        <p><strong>Seniors#:</strong> {modalData.SeniorsQty}</p>
+                                        <p><strong>Event:</strong> {modalData.Events}</p>
+                                        <p><strong>Services:</strong> {modalData.Services}</p>
+                                        <p><strong>Food Requests:</strong> {modalData.CateringFoods}</p>
+                                        <p><strong>Total Bill:</strong> ₱{modalData.Total}</p>
+                                        <p><strong>Status:</strong> {modalData.Status}</p>
+                                        <img src={modalData.ReservationFee} className="img-fluid" style={{ maxWidth: '100%', maxHeight: '400px' }} alt="Reservation Fee" />
+                                    </div>
+                                )}
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                    )}
-                    </div>
-                    <div className="modal-footer">
-                    <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
-                </div>
-            </div> 
-        </div>
-    </>
-  )
+            </div>
+        </>
+    );
 }

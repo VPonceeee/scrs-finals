@@ -263,7 +263,27 @@ html {
 }
 /*=====================ABOUT PAGE STYLE END HERE=============================*/
 
+/*=====================RESERVATION MESS STYLE START HERE=============================*/
 
+
+/*=====================RESERVATION MESS STYLE END HERE=============================*/
+
+#MessMainDiv
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    
+}
+
+#MessContainer
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 /*=====================AdminPage STYLE START HERE=============================*/
 
@@ -396,7 +416,7 @@ html {
 /*----------------------------*/
 
 :root{
-    --offcanvas-width: 320px;
+    --offcanvas-width: 300px;
     --TopPanelMenu: 56px;
 }
 
@@ -433,6 +453,8 @@ html {
         height: calc(100% - var);
     }
 }
+
+
 
 
 /*=====================AdminPage STYLE END HERE=============================*/

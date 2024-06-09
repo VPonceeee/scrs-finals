@@ -51,7 +51,7 @@ export default function Adminpage() {
     const navigate = useNavigate();
     const handleLogout = () => {
       logout();
-      navigate('/Sucasaadminpage');
+      navigate('/Sucasaadminloginpage');
     };
 
   return (
@@ -121,38 +121,43 @@ export default function Adminpage() {
             </span>
             <label className='fw-bold'>Reservation History </label> 
                       
-          </button>
+          </button>        
+        </div>
 
+        <div className='p-1'>
           <button 
             id='SideNavName' 
             type="button" 
-            className="btn fixed-bottom mb-3"
+            className="btn mb-3"
             onClick={handleLogout}
             style={{ textAlign: 'start' }}
           >
             <span className=' me-2'>
               <i class="bi bi-box-arrow-left"></i>
             </span>
-            <label className='fw-bold'>LogOut</label> 
-                      
+            <label className='fw-bold'>LogOut</label>               
           </button>
         </div>
       </div>
+
 
       <div className='APMain'>
       {visibleSection === 'dashboard' && (
           <div id='AdminContentsDashboard' classNameName="container">
               <h1>Dashboard</h1>
               <hr></hr>
-              <AdminCalendar/>
-              <br></br>
-              <AdminDashboard/>
+              <div className='row'>
+                <div className='col-5'><AdminCalendar/></div>
+                <div className='col'><AdminDashboard/></div>
+              </div>
           </div>
 
           )} {visibleSection === 'reservationRequest' && (
           <div id='ResevationRequest' classNameName='container'>
               <h1>Resevation Request</h1>
               <hr></hr>
+              <AdminCalendar/>
+              <br></br>
               <ReservationRequest/>
           </div>
           )} 

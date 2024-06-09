@@ -12,19 +12,8 @@ export default function ReservationRequest() {
   const reservations = useSelector(state => state.allReservations.reservations);
   const dispatch = useDispatch();
 
-  const fromName = 'Su Casa Resort';
-  const ConfirmationMess = {
-    message: 'We are happy to let you know that your reservation at Su Casa Resort is confirmed.\nThank you for choosing us.'
-  };
 
-  const DeclinedMess = {
-    message: 'We regret to inform you that we cannot confirm your reservation at Su Casa Resort for the requested dates\nWe apologize for any inconvenience this may cause.\nThank you for understanding.'
-  };
-
-
-  // ========================== DISPLAY THE DATA FROM THE DATABASE CODES START HERE ==========================
-
-
+// ========================== DISPLAY THE DATA FROM THE DATABASE CODES START HERE ==========================
     const displayReservation = () => {
       http.get('reservations')
         .then(result => {
@@ -46,34 +35,15 @@ export default function ReservationRequest() {
 
     useEffect(() => {
       displayReservation();
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new window.bootstrap.Tooltip(tooltipTriggerEl));
     }, []);
 
-  // ========================== DISPLAY THE DATA FROM THE DATABASE CODES END HERE ==========================
+// ========================== DISPLAY THE DATA FROM THE DATABASE CODES END HERE ==========================
 
-  // ========================== EMAILJS SEND FUNCTION START HERE ==========================
-  const sendEmail = (message, toEmail, toName) => {
-    const serviceId = 'service_92xrt0k';
-    const templateId = 'template_9m739d8';
-    const publicKey = 'i9bl4mAwIUXopq1JK';
 
-    const templateParams = {
-      from_name: fromName,
-      message: message,
-      to_email: toEmail,
-      to_name: toName,
-    };
 
-    emailjs.send(serviceId, templateId, templateParams, publicKey)
-      .then(response => {
-        console.log('Email sent successfully', response.status, response.text);
-      })
-      .catch(error => {
-        console.error('Failed to send email', error);
-      });
-  };
-  // ========================== EMAILJS SEND FUNCTION END HERE ==========================
-
-  // ========================== UPDATE THE DATA FROM THE DATABASE CODES START HERE ==========================
+// ========================== UPDATE THE DATA FROM THE DATABASE CODES START HERE ==========================
 
     const ConfirmRequest = (ReservationId) => {
       console.log('ReservationId:', ReservationId);
@@ -140,8 +110,40 @@ export default function ReservationRequest() {
           console.log('Update Error:', error.message);
         });
     };
-  // ========================== UPDATE THE DATA FROM THE DATABASE CODES END HERE ==========================
+// ========================== UPDATE THE DATA FROM THE DATABASE CODES END HERE ==========================
 
+// ========================== EMAILJS SEND FUNCTION START HERE ==========================
+    const ConfirmationMess = {
+      message: 'We are happy to let you know that your reservation at Su Casa Resort is confirmed.\nThank you for choosing us.'
+    };
+
+    const DeclinedMess = {
+      message: 'We regret to inform you that we cannot confirm your reservation at Su Casa Resort for the requested dates\nWe apologize for any inconvenience this may cause.\nThank you for understanding.\n\n Please note that your reservation fee will be refunded.'
+    };
+
+    const sendEmail = (message, toEmail, toName) => {
+      const serviceId = 'service_92xrt0k';
+      const templateId = 'template_9m739d8';
+      const publicKey = 'i9bl4mAwIUXopq1JK';
+  
+      const templateParams = {
+        from_name: 'Su Casa Resort',
+        message: message,
+        to_email: toEmail,
+        to_name: toName,
+      };
+  
+      emailjs.send(serviceId, templateId, templateParams, publicKey)
+        .then(response => {
+          console.log('Email sent successfully', response.status, response.text);
+        })
+        .catch(error => {
+          console.error('Failed to send email', error);
+        });
+    };
+// ========================== EMAILJS SEND FUNCTION END HERE ==========================
+
+// ========================== MODAL CODES START HERE ==========================
   const [fullscreenImage, setFullscreenImage] = useState(null);
 
   const handleImageClick = (imageSrc) => {
@@ -159,54 +161,101 @@ export default function ReservationRequest() {
     modal.show();
   };
 
+// ========================== MODAL CODES END HERE ==========================
+
+// ========================== FILTER AND SEARCH THE DATA FROM THE DATABASE CODES START HERE ==========================
+
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredReservations = reservations.filter(reservation =>
+    reservation.Status === 'Pending' &&
+    (reservation.Fullname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      reservation.MobileNo.includes(searchTerm) ||
+      reservation.Events.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+// ========================== FILTER AND SEARCH THE DATA FROM THE DATABASE CODES END HERE ==========================
+
+
   return (
     <>
       <div className='container'>
+
+        <div className="d-flex justify-content-center mb-3 ">
+          <div className='col'>
+            <div className="input-group gap-1">
+              <input 
+                type="text" 
+                className="form-control" 
+                placeholder="Search" 
+                aria-label="Search" 
+                aria-describedby="button-addon2" 
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <button className="btn btn-primary" type="button" id="button-addon2" >
+                <i className="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
         <table className="table table-striped">
-          <thead>
+          <thead >
             <tr>
+
               <th scope="col">Fullname</th>
               <th scope="col">Contact</th>
               <th scope="col">Event</th>
-              <th scope="col">Date of Reservation</th>
+              <th scope="col">Start Date<br/>(YY-MM-DD)</th>
+              <th scope="col">End Date<br/>(YY-MM-DD)</th>
               <th scope="col">Status</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
 
           <tbody>
-            {Array.isArray(reservations) && reservations.length > 0 ? (
-              reservations.filter(reservation => reservation.Status === 'Pending').reverse().map(showReservation => (
+            {Array.isArray(filteredReservations) && filteredReservations.length > 0 ? (
+              filteredReservations.map(showReservation => (
                 <tr key={showReservation.ReservationId}>
                   <td>{showReservation.Fullname}</td>
-                  <td>{showReservation.MobileNo}</td>
+                  <td>{showReservation.Email} <br/>{showReservation.MobileNo}</td>
                   <td>{showReservation.Events}</td>
-                  <td>{showReservation.StartDate} - {showReservation.EndDate}</td>
+                  <td>{showReservation.StartDate}</td>
+                  <td>{showReservation.EndDate}</td>
                   <td>{showReservation.Status}</td>
                   <td>
                     <div className='ActionBtn'>
                       <button
                         className="btn btn-primary"
                         onClick={() => handleViewClick(showReservation)}
+                        data-bs-toggle="tooltip"
+                        title="View"
                       >
-                        View
+                         <i class="bi bi-eye"></i>
                       </button>
+                      
                       <button
                         type="button"
                         className="btn btn-success"
                         onClick={() => ConfirmRequest(showReservation.ReservationId)}
+                        data-bs-toggle="tooltip"
+                        title="Accept"
                       >
-                        Confirm
-
+                        <i class="bi bi-check-circle"></i>
                       </button>
-
+  
                       <button 
                         type="button" 
                         className="btn btn-danger"
                         onClick={() => DeclineRequest(showReservation.ReservationId)}
+                        data-bs-toggle="tooltip"
+                        title="Decline"
                         >
-                          Decline
-
+                          <i class="bi bi-x-circle"></i>
                         </button>
 
                     </div>

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ReservationInvoice({ 
     handleBackClick,
+    handleSubmitClick,
     GuestInfo,
     startDate, 
     endDate,
@@ -41,8 +42,7 @@ export default function ReservationInvoice({
     const Discount = GetDiscount * KidSeniorDiscount;
     const TotalBill = parseInt(SubtotalEF) + parseInt(SubtotalEventService) - parseInt(Discount);
     const [reservationFee, setReservationFee] = useState('');
-    const [isFileSelected, setIsFileSelected] = useState(false);
-    const [showAlert, setShowAlert] = useState(false); 
+    const [isFileSelected, setIsFileSelected] = useState(false); 
     const navigate = useNavigate(); 
 
 // ====================== UPLOAD IMAGE TO CLOUDINARY CODES START HERE ======================
@@ -86,6 +86,7 @@ export default function ReservationInvoice({
          //Database connection
          http.post('reservations', NewReservation).then((result) => {
             console.log(result.data);
+            handleSubmitClick();
         }).catch(error => {
             if (error.response) {
                 console.error('Error data:', error.response.data);
@@ -95,15 +96,9 @@ export default function ReservationInvoice({
                 console.error('Error message:', error.message);
             }
         });
-        
+       
         console.log(NewReservation);
-        // ====================== ALERT CODES START HERE ======================
-        setShowAlert(true);  
-        setTimeout(() => {
-            setShowAlert(false);  
-            navigate('/');  
-        }, 5000);
-        // ====================== ALERT CODES END HERE ======================
+
     }
 
 // ====================== ADD RESERVATION TO THE DATABASE CODES END HERE ======================
@@ -112,17 +107,6 @@ export default function ReservationInvoice({
 
   return (
     <>
-        {showAlert && (
-            <div className="alert-container">
-                <div className="alert alert-success" role="alert">
-                    <h5 className="alert-heading">Your reservation has been successfully submitted</h5>
-                    <hr/>
-                    <p>We will update you via email and phone number regarding to your reservation status. </p>
-                    <hr/>
-                    <p className="mb-0">Thank you for choosing Su Casa Resort!</p>
-                </div>
-            </div>
-        )}
 
         <div id='RformMainDiv' className='container'> 
             <div className="container text-center">
@@ -282,7 +266,7 @@ export default function ReservationInvoice({
                         </div>
 
                         <div id='RFNote' className='container'>
-                            <p><strong>Note:</strong> Strictly no cancellation of reservation once it is reserved. If you cancel it, there will be no refund. A refund will only be issued if your reservation was unsuccessful. The admin will handle the refund process. We will email you once your reservation is successful or unsuccessful.</p>
+                            <p><strong>Note:</strong> Strictly no cancellation of reservation once it is reserved. If you cancel it, there will be no refund. A refund will only be issued if your reservation is unsuccessful. The admin will handle the refund process. We will email you once your reservation is successful or unsuccessful.</p>
                         </div>
     
 

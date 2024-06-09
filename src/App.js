@@ -8,6 +8,7 @@ import Navbar from './component/Navbar/Navbar';
 import ReservationPage from './component/ReservationForm/ReservationPage/ReservationPage';
 import './App.css';
 import ProtectedRoute from './component/AdminPage/Login/ProtectedRoute';
+import ReservationMess from './component/ReservationForm/ReservationMess/ReservationMess';
 
 function App() {
   const location = useLocation();

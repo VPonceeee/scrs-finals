@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReservationForm from '../ReservationForm/ReservationForm'
 import ReservationService from '../ReservationService/ReservationService';
 import ReservationInvoice from '../ReservationInvoice/ReservationInvoice';
+import ReservationMess from '../ReservationMess/ReservationMess';
 import { format } from 'date-fns';
 
 export default function ReservationPage() {
@@ -10,6 +11,7 @@ export default function ReservationPage() {
     const [showReservationForm, setShowReservationForm] = useState(true);
     const [showServiceForm, setShowServiceForm] = useState(false);
     const [showInvoiceForm, setShowInvoiceForm] = useState(false);
+    const [showReservationMess, setReservationMess] = useState(false);
 
     const handleNextClick = () => {
         if (showReservationForm) {
@@ -30,6 +32,13 @@ export default function ReservationPage() {
         setShowReservationForm(true);
         }
     };
+
+    const handleSubmitClick = () => {
+      if (showInvoiceForm) {
+      setShowInvoiceForm(false);
+      setReservationMess(true);
+      }
+  };
 
   // ====================== BUTTON FUNCTION CODES END HERE ======================
 
@@ -95,6 +104,7 @@ export default function ReservationPage() {
 
         <ReservationInvoice 
           handleBackClick={handleBackClick}
+          handleSubmitClick={handleSubmitClick}
           GuestInfo={GuestInfo}
           startDate={format(startDate, 'yyyy/MM/dd')} 
           endDate={format(endDate, 'yyyy/MM/dd')}
@@ -104,7 +114,10 @@ export default function ReservationPage() {
           foodRequests={foodRequests}
         />
 
-      ) : null}
+      ) : showReservationMess ? (
+        <ReservationMess/>
+        
+      ): null}
 
     </>
 

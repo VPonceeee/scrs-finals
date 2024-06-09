@@ -25,11 +25,10 @@ export default function Home() {
 
 
         <Link to="Reservation">
-
           <button type="button" id='ReservBtn' className="btn btn-lg" >
             Reserve Now
           </button>
-          </Link>
+        </Link>
 
 
       </div>
