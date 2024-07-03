@@ -6,8 +6,6 @@ export default function Home() {
 
   return (
 
-    
-
       <div className='HomePageBanner' style={{ 
         width: '100%', 
         height: '100vh', 
@@ -20,16 +18,11 @@ export default function Home() {
         <h2 className='hpTagline'>Your dream event starts with us. Reserve now!</h2>
         <br></br>
 
-
-
-
-
         <Link to="Reservation">
           <button type="button" id='ReservBtn' className="btn btn-lg" >
             Reserve Now
           </button>
         </Link>
-
 
       </div>
 

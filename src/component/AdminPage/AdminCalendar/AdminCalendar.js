@@ -87,6 +87,8 @@ export default function AdminCalendar() {
 // ========================== DISPLAY RESERVATION TO THE CALENDAR CODES END HERE ==========================
   return (
     <div className="container">
+      <h3 className='text-center'>Resort Calendar</h3>
+      <br></br>
       <Calendar
         localizer={localizer}
         events={events}

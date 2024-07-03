@@ -165,7 +165,9 @@ export default function ReservationApproved() {
         <>
             <div className='container'>
                 <div className="d-flex align-items-end flex-row-reverse gap-2 mb-3 ">
+                
                     <div className='col-9 col-lg-5 d-flex flex-row gap-2'>
+                        
                         <div className="input-group">
                             <input 
                                 type="text" 
@@ -217,6 +219,7 @@ export default function ReservationApproved() {
                             </div>
                         </ul>
                     </div>
+
                 </div>
 
                 <table className="table table-hover">

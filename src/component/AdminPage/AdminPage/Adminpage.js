@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminDashboard from '../AdminDasboard/AdminDashboard';
-import ReservationApproved from '../ReservationApproved/ReservationApproved';
+
 import ReservationRequest from '../ReservationRequest/ReservationRequest';
 import AdminCalendar from '../AdminCalendar/AdminCalendar';
 import ReservationHistory from '../ReservationHistory/ReservationHistory';
@@ -147,9 +147,7 @@ export default function Adminpage() {
           <div id='AdminContentsDashboard' classNameName="container">
               <h1>Dashboard</h1>
               <hr></hr>
-              <AdminCalendar/>
-              <br></br>
-              <ReservationApproved/>
+              <AdminDashboard/>
           </div>
 
           )} {visibleSection === 'reservationRequest' && (

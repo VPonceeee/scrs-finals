@@ -251,7 +251,7 @@ export default function ReservationService({
                         </div>
                     </div>
                     <div className=' col'>
-                        <div id='BackBtnDiv' className="d-grid gap-2 d-md-flex justify-content-md-end">                    
+                        <div id='NextBtnDiv' className="d-grid gap-2 d-md-flex justify-content-md-end">                    
                             <button 
                                 type="button" 
                                 className="btn btn-lg btn-primary" 

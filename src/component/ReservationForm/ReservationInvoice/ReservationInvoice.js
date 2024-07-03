@@ -288,7 +288,7 @@ export default function ReservationInvoice({
                     </div>
 
                     <div className='col'>
-                        <div id='BackBtnDiv' className="d-grid gap-3 d-md-flex justify-content-md-end">                        
+                        <div id='NextBtnDiv' className="d-grid gap-3 d-md-flex justify-content-md-end">                        
                             <button 
                                 type="button" 
                                 className="btn btn-success btn-lg"

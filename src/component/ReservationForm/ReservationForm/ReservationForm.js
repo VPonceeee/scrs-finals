@@ -87,15 +87,7 @@ export default function ReservationForm({
             }
         };
 
-    /* ====================== FORM REQUIREMENTS FUNCTION CODES START HERE ====================== */
-
-        // const Event = selectedEvent === 'Other Events' ? `Other Events/${GuestInfo.OtherEvent}` : selectedEvent;
-        // const StartDate = GuestInfo.StartDate ? format(GuestInfo.StartDate, 'yyyy/MM/dd') : '';
-        // const EndDate = GuestInfo.EndDate ? format(GuestInfo.EndDate, 'yyyy/MM/dd') : '';
-        
-        // const logGuestInfo = () => {
-        //     console.log({ ...GuestInfo, Event,StartDate,EndDate });
-        // };
+    /* ====================== FORM REMINDER TO FILL UP FUNCTION CODES END HERE ====================== */
 
   return (
     <>
@@ -294,13 +286,13 @@ export default function ReservationForm({
 
                 <div className='row'>
                     <div className='col'>
-                        <div id='BackBtnDiv' className="d-grid gap-2 d-md-flex justify-content-md-end"> 
+                        <div id='RFNxtBtn' className="d-grid gap-2 d-md-flex justify-content-md-end"> 
                             <button 
                                 type="button" 
                                 className="btn btn-lg btn-primary" 
                                 onClick={handleGuestRequirments}                                
                             >                                
-                                Next
+                                Next →
                                 
                             </button>
                         </div>
